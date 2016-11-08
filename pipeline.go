@@ -44,8 +44,10 @@ func Start(h http.HandlerFunc) PipeHandler {
 }
 
 // Pipe adds the specified Pipeline to the list of Pipelines to process  when creating the final http.HandlerFunc
-func (ph PipeHandler) Pipe(ps Pipeline) PipeHandler {
-	ph.pipes = append(ph.pipes, ps)
+func (ph PipeHandler) Pipe(ps ...Pipeline) PipeHandler {
+	for _, p := range ps {
+		ph.pipes = append(ph.pipes, p)
+	}
 	return ph
 }
 
